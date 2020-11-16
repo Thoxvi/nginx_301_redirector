@@ -5,14 +5,17 @@
 ## 如何使用
 
 ```shell
-nginx_port=8080
+# nginx_http_port=80
+# nginx_https_port=443
 redirect_addr=https://www.notion.so/thoxvi/a78416502c6d4df69b11c6051086c870
 
 # docker build -t thoxvi/nginx_301_redirector:latest .
 docker pull thoxvi/nginx_301_redirector:latest
 docker run -d \
            --name redirector \
-           -p $nginx_port:80 \
+           --network=host \
+        #    -p $nginx_http_port:80 \
+        #    -p $nginx_https_port:443 \
            -e REDIRECT_ADDR=$redirect_addr \
            --restart=always \
            thoxvi/nginx_301_redirector:latest
