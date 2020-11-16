@@ -8,7 +8,8 @@
 nginx_port=8080
 redirect_addr=https://www.notion.so/thoxvi/a78416502c6d4df69b11c6051086c870
 
-docker build -t thoxvi/nginx_301_redirecter:latest .
+# docker build -t thoxvi/nginx_301_redirecter:latest .
+docker pull thoxvi/nginx_301_redirecter:latest
 docker run -d \
            --name redirecter \
            -p $nginx_port:80 \
