@@ -5,8 +5,20 @@
 ## 如何使用
 
 ```shell
-docker build -t thoxvi/nginx_301_redirecter:latest .
-docker run --rm --name redirecter -e REDIRECT_ADDR=https://www.notion.so/thoxvi/a78416502c6d4df69b11c6051086c870 -p 8080:80 thoxvi/nginx_301_redirecter:latest
+nginx_port=8080
+redirect_addr=https://www.notion.so/thoxvi/a78416502c6d4df69b11c6051086c870
 
-# docker rm -f redirecter
+docker build -t thoxvi/nginx_301_redirecter:latest .
+docker run -d \
+           --name redirecter \
+           -p $nginx_port:80 \
+           -e REDIRECT_ADDR=$redirect_addr \
+           --restart=always \
+           thoxvi/nginx_301_redirecter:latest
+```
+
+## 如何停止
+
+```shell
+docker rm -f redirecter
 ```
